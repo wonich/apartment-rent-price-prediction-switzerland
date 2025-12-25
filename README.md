@@ -4,7 +4,7 @@ A Streamlit app to predict real estate apartment excl. rent prices for switzerla
 
 You can use the app via the Streamlit link:
 
-[Streamlit App Link](https://apartment-rent-price-prediction-arount-bulach-ereqtgclelgmmyjk.streamlit.app/)  <!-- Add your Streamlit app URL here -->
+[Streamlit App Link](https://apartment-rent-price-prediction-switzerland-omdkidunyhc3ssby75.streamlit.app/)  <!-- Add your Streamlit app URL here -->
 
 Feel free to play around, share, give feedback, and use!
 
