@@ -128,7 +128,7 @@ def app():
     size_rooms = st.slider("Number of rooms", min_value=1.0, max_value=4.5, value=2.5, step=0.5)
     size_square_meters = st.slider("Size (m²)", min_value=20, max_value=300, value=49)
     app_count_building = st.slider("Number of apartments in the building", min_value=1, max_value=50, value=8)
-    floor_numbers = st.slider("On which floor is the apartment located?", min_value=0, max_value=20, value=2)
+    floor_numbers = st.slider("On which floor is the apartment located?", min_value=0, max_value=10, value=2)
     age_of_building = st.slider("Age of building (years)", min_value=0, max_value=100, value=100)
     penthouse = st.checkbox("Is it a penthouse?")
     washing_machine = st.checkbox("Has washing machine?")
