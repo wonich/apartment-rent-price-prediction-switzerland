@@ -125,7 +125,7 @@ def app():
     
     address = st.text_input("Where is the appartment located?", "Niederdorfstrasse 63, 8001 Zürich")
 
-    size_rooms = st.slider("Number of rooms", min_value=1.0, max_value=5.5, value=2.5, step=0.5)
+    size_rooms = st.slider("Number of rooms", min_value=1.0, max_value=4.5, value=2.5, step=0.5)
     size_square_meters = st.slider("Size (m²)", min_value=20, max_value=300, value=49)
     app_count_building = st.slider("Number of apartments in the building", min_value=1, max_value=50, value=8)
     floor_numbers = st.slider("Floor of the appartment", min_value=0, max_value=20, value=2)
