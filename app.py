@@ -1,7 +1,8 @@
-﻿﻿import streamlit as st
+﻿import streamlit as st
 import requests
 import matplotlib.pyplot as plt
 import numpy as np
+
 
 IMMOLEX_API_KEY = st.secrets["IMMOLEX_API_KEY"]
 
@@ -122,21 +123,21 @@ def app():
     # Input fields for apartment features
     st.header("Apartment details")
     
-    address = st.text_input("Where is the appartment located?", "Marktgasse 28, Bülach")
+    address = st.text_input("Where is the appartment located?", "Niederdorfstrasse 63, 8001 Zürich")
 
     size_rooms = st.slider("Number of rooms", min_value=1.0, max_value=5.5, value=2.5, step=0.5)
-    size_square_meters = st.slider("Size (m²)", min_value=20, max_value=300, value=70)
+    size_square_meters = st.slider("Size (m²)", min_value=20, max_value=300, value=49)
     app_count_building = st.slider("Number of apartments in the building", min_value=1, max_value=50, value=8)
     floor_numbers = st.slider("Floor of the appartment", min_value=0, max_value=20, value=2)
-    age_of_building = st.slider("Age of building (years)", min_value=0, max_value=100, value=5)
+    age_of_building = st.slider("Age of building (years)", min_value=0, max_value=100, value=100)
     penthouse = st.checkbox("Is it a penthouse?")
     washing_machine = st.checkbox("Has washing machine?")
     elevator = st.checkbox("Has Elevator?")
     garden = st.checkbox("Has garden?")
     is_first_rent = st.checkbox("Is it the first rent?")
     floor_laminate = st.checkbox("Has laminate floor?")
-    renovate = st.checkbox("Is it renovated?")
-    balcony_terrace = st.checkbox("Has balcony or terrace?")
+    renovate = st.checkbox("Is it renovated?", value=1)
+    balcony_terrace = st.checkbox("Has balcony or terrace?", value=1)
     
 
     # Prepare the data payload
@@ -219,9 +220,7 @@ def app():
                 # Extract values
                 quarters = [item["quarter"] for item in chronical_predictions]
                 predictions = [item["prediction"] for item in chronical_predictions]
-                lower = [item["interval"]["lower"] for item in chronical_predictions]
-                upper = [item["interval"]["upper"] for item in chronical_predictions]
-
+               
                 # Headline
                 st.subheader("Predicted rent development over time")
 
@@ -230,24 +229,10 @@ def app():
                 
                 ax.plot(
                     quarters,
-                    lower,
-                    marker="o",
-                    linewidth=2,
-                    label="Predicted lower excl. rent"
-                )
-                ax.plot(
-                    quarters,
                     predictions,
                     marker="o",
                     linewidth=2,
-                    label="Predicted median excl. rent"
-                )
-                ax.plot(
-                    quarters,
-                    upper,
-                    marker="o",
-                    linewidth=2,
-                    label="Predicted upper excl. rent"
+                    label="excl. rent per month"
                 )
 
                 ax.set_title(
@@ -256,11 +241,11 @@ def app():
                     fontweight="bold"
                 )
                 ax.set_xlabel("Quarter", fontsize=14)
-                ax.set_ylabel("Price (CHF)", fontsize=14)
+                ax.set_ylabel("Excl. rent per month (CHF)", fontsize=14)
 
                 ax.set_ylim(
-                    min(lower) - 100,
-                    max(upper) + 100
+                    min(predictions) - 100,
+                    max(predictions) + 100
                 )
 
                 ax.grid(True, linestyle="--", alpha=0.5)
@@ -282,35 +267,19 @@ def app():
                 # Extract values
                 ageofbuilding = [item["ageofbuilding"] for item in buildingage_predictions]
                 predictions = [item["prediction"] for item in buildingage_predictions]
-                lower = [item["interval"]["lower"] for item in buildingage_predictions]
-                upper = [item["interval"]["upper"] for item in buildingage_predictions]
-
+                
                 # Headline
-                st.subheader("Predicted excl. rent for different building ages")
+                st.subheader("excl. rent for different building ages")
 
                 # Plot
                 fig, ax = plt.subplots(figsize=(10, 4))
                 
                 ax.plot(
                     ageofbuilding,
-                    lower,
-                    marker="o",
-                    linewidth=2,
-                    label="Predicted lower excl. Rent"
-                )
-                ax.plot(
-                    ageofbuilding,
                     predictions,
                     marker="o",
                     linewidth=2,
-                    label="Predicted median excl. Rent"
-                )
-                ax.plot(
-                    ageofbuilding,
-                    upper,
-                    marker="o",
-                    linewidth=2,
-                    label="Predicted upper excl. Rent"
+                    label="excl. rent per month"
                 )
 
                 ax.set_title(
@@ -319,11 +288,11 @@ def app():
                     fontweight="bold"
                 )
                 ax.set_xlabel("Age of building", fontsize=14)
-                ax.set_ylabel("Price (CHF)", fontsize=14)
+                ax.set_ylabel("Excl. rent per month (CHF)", fontsize=14)
 
                 ax.set_ylim(
-                    min(lower) - 100,
-                    max(upper) + 100
+                    min(predictions) - 100,
+                    max(predictions) + 100
                 )
 
                 ax.grid(True, linestyle="--", alpha=0.5)
