@@ -304,7 +304,7 @@ def app():
 
     # Footer Section
     st.markdown("<hr>", unsafe_allow_html=True)  # Horizontal line
-    st.markdown('<p style="text-align: center;">For more informations about the Model have a look at the <a href="https://github.com/wonich/apartment-rent-price-prediction-arount-Bulach">github-Repo</a></p>', unsafe_allow_html=True)    
+    st.markdown('<p style="text-align: center;">For more informations about the Model have a look at the <a href="https://github.com/wonich/apartment-rent-price-prediction-switzerland">github-Repo</a></p>', unsafe_allow_html=True)    
     st.markdown('<p style="text-align: center;">Data and model are powered by <a href="https://www.immolex.ch"><strong>IMMOLEX</strong></a></p>', unsafe_allow_html=True)
     
 # Run the app
