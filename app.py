@@ -255,53 +255,6 @@ def app():
 
                 st.pyplot(fig)
 
-        prediction_buildingage_result = get_rent_prediction_ageofbuilding(data)
-        
-        if prediction_buildingage_result:
-            buildingage_predictions = prediction_buildingage_result["ageofbuilding_predictions"]
-
-            # Defensive Check
-            if len(buildingage_predictions) < 2:
-                st.error("Not enough data points to display a time series.")
-            else:
-                # Extract values
-                ageofbuilding = [item["ageofbuilding"] for item in buildingage_predictions]
-                predictions = [item["prediction"] for item in buildingage_predictions]
-                
-                # Headline
-                st.subheader("excl. rent for different building ages")
-
-                # Plot
-                fig, ax = plt.subplots(figsize=(10, 4))
-                
-                ax.plot(
-                    ageofbuilding,
-                    predictions,
-                    marker="o",
-                    linewidth=2,
-                    label="excl. rent per month"
-                )
-
-                ax.set_title(
-                    "Apartment excl. rent price prediction (age of building)",
-                    fontsize=16,
-                    fontweight="bold"
-                )
-                ax.set_xlabel("Age of building", fontsize=14)
-                ax.set_ylabel("Excl. rent per month (CHF)", fontsize=14)
-
-                ax.set_ylim(
-                    min(predictions) - 100,
-                    max(predictions) + 100
-                )
-
-                ax.grid(True, linestyle="--", alpha=0.5)
-                ax.legend()
-
-                plt.xticks(rotation=45)
-
-                st.pyplot(fig)
-
     # Footer Section
     st.markdown("<hr>", unsafe_allow_html=True)  # Horizontal line
     st.markdown('<p style="text-align: center;">For more informations about the Model have a look at the <a href="https://github.com/wonich/apartment-rent-price-prediction-switzerland">github-Repo</a></p>', unsafe_allow_html=True)    
